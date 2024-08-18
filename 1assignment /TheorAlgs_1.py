@@ -1,38 +1,32 @@
-def polynomial_value(coefficient, x):
-
+def polynomial_value(coefficients, x):
     result = 0
-    max_stepen = len(coefficient) - 1
+    n = len(coefficients) - 1
+    k = 0
 
-
-    for i in range(len(coefficient)):
-        result += coefficient[i] * (x ** max_stepen)
-        max_stepen -= 1
+    while k <= n:
+        result += coefficients[k] * (x ** (n - k))
+        k += 1
 
     return result
 
-
-print('Уважно! Якщо ви наприклад вводите "n=3", то ваш поліном повинен виглядати як - ax^2+bx+c , [a,b,c]')
+print('Увага! Якщо ви вводите "n=3", то ваш поліном має виглядати як ax^2 + bx + c, [a, b, c]')
 n = int(input('Введіть кількість коефіцієнтів (n): '))
-coefficient = []
+coefficients = []
 
-for i in range(n):
-    coef = float(input(f"Введіть коефіцієнт для x^{n - 1 - i}: "))
-    coefficient.append(coef)
+k = 0
+while k < n:
+    coef = float(input(f"Введіть коефіцієнт для x^{n - 1 - k}: "))
+    coefficients.append(coef)
+    k += 1
 
-
-x_input = input('Введіть значення при якому значенні "x" ви хочете порахувати поліном: ')
-
-
-if '.' in x_input:
-    x = float(x_input)
-else:
-    x = int(x_input)
+x_input = input('Введіть значення "x", для якого ви хочете обчислити поліном: ')
+x = float(x_input) if '.' in x_input else int(x_input)
 
 
-result = polynomial_value(coefficient, x)
+result = polynomial_value(coefficients, x)
 
-
+# Виведення результату
 if isinstance(x, int):
-    print(f"Значення полінома при значенні {x}: {int(result)}")
+    print(f"Значення полінома при x = {x}: {int(result)}")
 else:
-    print(f"Значення полінома при значенні {x}: {result}")
+    print(f"Значення полінома при x = {x}: {result}")
